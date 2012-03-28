@@ -1,5 +1,5 @@
 from django.db import models
-from tagging.fields import TagField
+from taggit_autosuggest.managers import TaggableManager
 
 PICASAWEB_ACCESS = (
     ('private', 'Private'),
@@ -22,7 +22,7 @@ class Photo(models.Model):
     thumbnail_url = models.URLField()
     content_url = models.URLField()
     #tag_list = models.CharField(max_length=250)
-    tags = TagField()
+    tags = TaggableManager()
     enable_comments = models.BooleanField(default=True)
     #license = models.CharField(max_length=50, choices=FLICKR_LICENSES)
     geo_latitude = models.CharField(max_length=50, blank=True)

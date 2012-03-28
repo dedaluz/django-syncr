@@ -1,12 +1,12 @@
 from django.db import models
 from django.conf import settings
-from tagging.fields import TagField
+from taggit_autosuggest.managers import TaggableManager
 
 class Bookmark(models.Model):
     # description, href, tags, extended, dt
     description = models.CharField(max_length=250, blank=True)
     url = models.URLField(unique=True)
-    tags = TagField()
+    tags = TaggableManager()
     extended_info = models.TextField(blank=True)
     post_hash = models.CharField(max_length=100)
     saved_date = models.DateTimeField()

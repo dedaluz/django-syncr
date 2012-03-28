@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
-from tagging.fields import TagField
+from taggit_autosuggest.managers import TaggableManager
 
 ## If you are syncing from more than one tumblr source set the SOURCE_CHOICES
 
@@ -24,7 +24,7 @@ class TumblrPost(models.Model):
     post_id = models.IntegerField()
     format = models.IntegerField(choices=FORMAT_CHOICES, default=1)
     post_link = models.URLField()
-    tags = TagField()
+    tags = TaggableManager()
     feed_item = models.URLField(blank=True)
     pub_time = models.DateTimeField()
     tumblelog = models.CharField(max_length=300)

@@ -4,7 +4,7 @@ from django.utils.text import truncate_words
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from tagging.fields import TagField
+from taggit_autosuggest.managers import TaggableManager
 
 FLICKR_LICENSES = (
     ('0', 'All Rights Reserved'),
@@ -61,7 +61,7 @@ class Photo(models.Model):
     large_height = models.PositiveSmallIntegerField(null=True) # New
     original_width = models.PositiveSmallIntegerField() # New
     original_height = models.PositiveSmallIntegerField() # New
-    tags = TagField(blank=True)
+    tags = TaggableManager(blank=True)
     enable_comments = models.BooleanField(default=True)
     license = models.CharField(max_length=50, choices=FLICKR_LICENSES)
     geo_latitude = models.FloatField(null=True)

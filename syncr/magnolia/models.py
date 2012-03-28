@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from tagging.fields import TagField
+from taggit_autosuggest.managers import TaggableManager
 import time
 
 RATINGS = (
@@ -22,7 +22,7 @@ class Link(models.Model):
 	screen_url = models.URLField('screenshot url')
 	rating = models.CharField(max_length=1, choices=RATINGS)
 	add_date = models.DateTimeField()
-	tags = TagField()
+	tags = TaggableManager()
 		
 	class Meta:
 		ordering = ['-add_date']

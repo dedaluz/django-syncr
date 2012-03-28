@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from tagging.models import Tag, TaggedItem
+from taggit_autosuggest.managers import TaggableManager
 
 
 class Video(models.Model):
@@ -11,22 +11,11 @@ class Video(models.Model):
     title       = models.CharField(max_length=250)
     author      = models.ForeignKey('YoutubeUser')
     description = models.TextField(blank=True)
-    tag_list    = models.CharField(max_length=250)
+    tags        = TaggableManager()
     view_count  = models.PositiveIntegerField()
     url         = models.URLField()
     thumbnail_url = models.URLField(blank=True)
     length      = models.PositiveIntegerField()
-
-    def _get_tags(self):
-        return Tag.objects.get_for_object(self)
-    def _set_tags(self, tag_list):
-        Tag.objects.update_tags(self, tag_list)
-    tags = property(_get_tags, _set_tags)
-
-    def save(self, force_insert=False, force_update=False):
-        super(Video, self).save(force_insert=force_insert,
-				force_update=force_update)
-        Tag.objects.update_tags(self, self.tag_list)
 
     def embed_url(self):
         return u'http://www.youtube.com/v/%s' % self.video_id
