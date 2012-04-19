@@ -9,7 +9,7 @@ class Checkin(models.Model):
     """
     place_id = models.CharField(max_length=50)
     location = models.CharField(max_length=150)
-    tiny_avtar = models.URLField(verify_exists=True)
+    tiny_avtar = models.URLField()
     latitude = models.FloatField()
     longitude = models.FloatField()
     created_at = models.DateTimeField()
